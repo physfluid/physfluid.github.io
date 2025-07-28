@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Learning an Implicit Physical Model for Image-based Fluid Simulation</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+<section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Learning an Implicit Physical Model for Image-based Fluid Simulation</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://emily-jia.github.io/personal-web/">Emily Yue-ting Jia</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://pointscoder.github.io/">Jiageng Mao</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://zhiyuan-gao.github.io/">Zhiyuan Gao</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.yajie-zhao.com/">Yajie Zhao</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://yuewang.xyz/">Yue Wang</a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">University of Southern California,</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">ICCV 2025</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser image-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/teaser.png"  style="width: 200%; height: 200%;">
+      <h2 class="subtitle has-text-left">
+        Fig 1: Our goal is to create realistic fluid animations that are consistent with basic physics laws from a single still image . Our methods handle the obstructions added in the input images and generate realistic fluid motions and generate fluid animation videos from novel views and moving cameras. 
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser image -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Humans possess an exceptional ability to visualize 4D scenes, encompassing both motion and 3D geometry, from a single still image. This ability is rooted in our accumulated observations of similar scenes and an intuitive understanding of physics. In this paper, we aim to replicate this capacity in neural networks, specifically focusing on natural fluid imagery. Existing methods for this task typically employ simplistic 2D motion estimators to animate the image, leading to motion predictions that often defy physical principles, resulting in unrealistic animations. Our approach introduces a novel method for generating 4D scenes with physics-consistent animation from a single image. We propose the use of a physics-informed neural network that predicts motion for each point, guided by a loss term derived from fundamental physical principles, including the Navier-Stokes equations. To reconstruct the 3D geometry, we predict feature-based 3D Gaussians from the input image, which are then animated using the predicted motions and rendered from any desired camera perspective. Experimental results highlight the effectiveness of our method in producing physically plausible animations, showcasing significant performance improvements over existing methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Youtube video -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container"> -->
+      <!-- Paper video. -->
+      <!-- <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths"> -->
+          
+          <!-- <div class="publication-video"> -->
+            <!-- Youtube embed code here -->
+            <!-- <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End youtube video -->
+
+
+<!-- Video Results -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Video Results</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1 media-container" video-id="video1" video-style='width="100%"' video-source="static/videos/teaser/edited_5.mp4">
+          <!-- <video poster="" id="video1" autoplay controls muted loop>
+            <source src="static/videos/teaser/edited_5.mp4"
+            type="video/mp4">
+          </video> -->
+        </div>
+        <div class="item item-video2 media-container" video-id="video2" video-style='width="100%"' video-source="static/videos/teaser/edited_8.mp4">
+          <!-- <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <source src="static/videos/teaser/edited_8.mp4"
+            type="video/mp4">
+          </video> -->
+        </div>
+        <div class="item item-video2 media-container" video-id="video3" video-style='width="100%"' video-source="static/videos/teaser/00994_00708.mp4">
+          <!-- <video poster="" id="video3" autoplay controls muted loop height="100%">
+            <source src="static/videos/teaser/00994_00708.mp4"
+            type="video/mp4">
+          </video> -->
+        </div>
+        <div class="item item-video2 media-container" video-id="video4" video-style='width="100%"' video-source="static/videos/teaser/0.mp4">
+          <!-- <video poster="" id="video4" autoplay controls muted loop height="100%">\
+            <source src="static/videos/teaser/0.mp4"
+            type="video/mp4">
+          </video> -->
+        </div>
+        <div class="item item-video2 media-container" video-id="video5" video-style='width="100%"' video-source="static/videos/teaser/00996_00000_resize.mp4">
+          <!-- <video poster="" id="video4" autoplay controls muted loop width="100%" aspect-ratio="1.77">\
+            <source src="static/videos/teaser/00996_00000_resize.mp4"
+            type="video/mp4">
+          </video> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Video Results -->
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Qualitative Comparison - Videos</h2>
+      <div>
+        <h3 class="title" style="font-size: 1.5rem;"> From Input View </h3>
+        <div style="text-align: center;">
+          <div style="display: flex; justify-content: space-around;width: 100%;">
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_holy_00991_00000.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_holy_00991_00000.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_3dc_00991_00000.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_3dc_00991_00000.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_our_00991_00000.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_our_00991_00000.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-around;">
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_holy_00992_00708.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_holy_00992_00708.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_3dc_00992_00708.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_3dc_00992_00708.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_our_00992_00708.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_our_00992_00708.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: space-around;">
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_holy_00999_01044.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_holy_00999_01044.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_3dc_00999_01044.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_3dc_00999_01044.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+            <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/orig_our_00999_01044.mp4">
+              <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                <source src="static/videos/cmp/orig_our_00999_01044.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video> -->
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+            <div style="width: 33%;"><strong>Holynski et al.</strong></div>
+            <div style="width: 33%;"><strong>3D-Cinemagraphy</strong></div>
+            <div style="width: 33%;"><strong>Ours</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="title" style="font-size: 1.5rem;"> From Novel Views </h3>
+        <div>
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/novel_4d_00994_02832_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/novel_4d_00994_02832_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/novel_3dc_00994_02832_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/novel_3dc_00994_02832_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/novel_our_00994_02832_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/novel_our_00994_02832_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/novel_4d_00999_01044_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/novel_4d_00999_01044_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/novel_3dc_00999_01044_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/novel_3dc_00999_01044_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/novel_our_00999_01044_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/novel_our_00999_01044_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+              <div style="width: 33%;"><strong>Make-it-4D</strong></div>
+              <div style="width: 33%;"><strong>3D-Cinemagraphy</strong></div>
+              <div style="width: 33%;"><strong>Ours</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="title" style="font-size: 1.5rem;"> Image-Editing </h3>
+        <div>
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/edited_3dc_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 33%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/cmp/edited_our_resize.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+            <div style="width: 33%;"><strong>3D-Cinemagraphy</strong></div>
+            <div style="width: 33%;"><strong>Ours</strong></div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Physic Understanding Analysis -- on Real Scene</h2>
+    </div>
+  </div>
+</section> -->
+
+<!-- Qualitative Comparison-->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Qualitative Results -- Image Comparison</h2>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 15%;">
+              <img src="static/images/orig_results/gt_1.png" alt="Input Image" class="rescale-input" style="aspect-ratio: 1.51;">
+          </div>
+  
+          <div style="width: 25%;">
+              <img src="static/images/orig_results/img_3d_1.png" alt="3D-Cinemagraphy" class="rescale-input">
+          </div>
+  
+          <div style="width: 25%;">
+            <img src="static/images/orig_results/img_holy_1.png" alt="Holynski et al." class="rescale-input">
+          </div>
+
+          <div style="width: 25%;">
+            <img src="static/images/orig_results/img_our_1.png" alt="Ours" class="rescale-input">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 15%;">
+              <img src="static/images/orig_results/gt_2.png" alt="Input Image" class="rescale-input" style="aspect-ratio: 1.51;">
+          </div>
+  
+          <div style="width: 25%;">
+              <img src="static/images/orig_results/img_3d_2.png" alt="3D-Cinemagraphy" class="rescale-input">
+          </div>
+  
+          <div style="width: 25%;">
+            <img src="static/images/orig_results/img_holy_2.png" alt="Holynski et al." class="rescale-input">
+          </div>
+
+          <div style="width: 25%;">
+            <img src="static/images/orig_results/img_our_2.png" alt="Ours" class="rescale-input">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 15%;">
+              <img src="static/images/orig_results/gt_3.png" alt="Input Image" class="rescale-input" style="aspect-ratio: 1.51;">
+          </div>
+  
+          <div style="width: 25%;">
+              <img src="static/images/orig_results/img_3d_3.png" alt="3D-Cinemagraphy" class="rescale-input">
+          </div>
+  
+          <div style="width: 25%;">
+            <img src="static/images/orig_results/img_holy_3.png" alt="Holynski et al." class="rescale-input">
+          </div>
+
+          <div style="width: 25%;">
+            <img src="static/images/orig_results/img_our_3.png" alt="Ours" class="rescale-input">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+          <div style="width: 15%;"><strong>Input Image</strong></div>
+          <div style="width: 25%;"><strong>3D-Cinemagraphy</strong></div>
+          <div style="width: 25%;"><strong>Holynski et al.</strong></div>
+          <div style="width: 25%;"><strong>Ours</strong></div>
+        </div>
+
+        <p style="text-align: left;">Fig 2: <strong>Qaulitative results on Holynski et al. validation set from the input view..</strong> Our method produces compelling results, while others exhibit artifacts such as holes, dots, and mosaic patterns. Zoomed-ins and deviation maps are also provided for better visualizations.</p>
+      </div>
+
+
+      <div style="text-align: center;">
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 15%;">
+              <img src="static/images/novel_results/novel_gt_1.png" alt="Input Image" class="rescale-input" style="aspect-ratio: 1.51;">
+          </div>
+  
+          <div style="width: 25%;">
+              <img src="static/images/novel_results/novel_3d_1.png" alt="3D-Cinemagraphy" class="rescale-input">
+          </div>
+  
+          <div style="width: 25%;">
+            <img src="static/images/novel_results/novel_4d_1.png" alt="Make-it-4D" class="rescale-input">
+          </div>
+
+          <div style="width: 25%;">
+            <img src="static/images/novel_results/novel_our_1.png" alt="Ours" class="rescale-input">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 15%;">
+              <img src="static/images/novel_results/novel_gt_2.png" alt="Input Image" class="rescale-input" style="aspect-ratio: 1.51;">
+          </div>
+  
+          <div style="width: 25%;">
+              <img src="static/images/novel_results/novel_3d_2.png" alt="3D-Cinemagraphy" class="rescale-input">
+          </div>
+  
+          <div style="width: 25%;">
+            <img src="static/images/novel_results/novel_4d_2.png" alt="Make-it-4D" class="rescale-input">
+          </div>
+
+          <div style="width: 25%;">
+            <img src="static/images/novel_results/novel_our_2.png" alt="Ours" class="rescale-input">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around;">
+          <div style="width: 15%;">
+              <img src="static/images/novel_results/novel_gt_3.png" alt="Input Image" class="rescale-input" style="aspect-ratio: 1.51;">
+          </div>
+  
+          <div style="width: 25%;">
+              <img src="static/images/novel_results/novel_3d_3.png" alt="3D-Cinemagraphy" class="rescale-input">
+          </div>
+  
+          <div style="width: 25%;">
+            <img src="static/images/novel_results/novel_4d_3.png" alt="Make-it-4D" class="rescale-input">
+          </div>
+
+          <div style="width: 25%;">
+            <img src="static/images/novel_results/novel_our_3.png" alt="Ours" class="rescale-input">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+          <div style="width: 15%;"><strong>Input Image</strong></div>
+          <div style="width: 25%;"><strong>3D-Cinemagraphy</strong></div>
+          <div style="width: 25%;"><strong>Make-it-4D</strong></div>
+          <div style="width: 25%;"><strong>Ours</strong></div>
+        </div>
+
+        <p style="text-align: left;">Fig 3: <strong>Qaulitative results on Holynski et al. validation set from novel views.</strong> Our method produces compelling results, whereas other methods exhibit the same artifacts present in videos from the input view, along with new artifacts in occluded areas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quatitative results-->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Quatitative Results</h2>
+
+      <div style="align-items: center; justify-content: center; display: flex; flex-direction: column; margin-bottom: 20px;">
+        <table style="width: 40%; align-self: center; margin-bottom: 10px;">
+          <thead>
+              <tr>
+                  <th style="text-align: left;">Method</th>
+                  <th>PSNR ↑</th>
+                  <th>SSIM ↑</th>
+                  <th>LPIPS ↓</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td style="text-align: left;">Holynski et al.</td>
+                  <td>22.11</td>
+                  <td>0.64</td>
+                  <td>0.34</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;">3D-Cinemagraphy</td>
+                  <td>22.81</td>
+                  <td>0.70</td>
+                  <td>0.22</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;" class="bold">Ours</td>
+                  <td class="bold">24.98</td>
+                  <td class="bold">0.78</td>
+                  <td class="bold">0.20</td>
+              </tr>
+          </tbody>
+        </table>
+        <p><strong>Table 1:</strong> Quantitative results of generating videos from the input view on Holynski et al. validation set.</p>
+      </div>
+
+      <div style="align-items: center; justify-content: center; display: flex; flex-direction: column; margin-bottom: 20px;">
+        <table style="width: 40%; align-self: center; margin-bottom: 10px;">
+          <thead>
+              <tr>
+                  <th style="text-align: left;">Method</th>
+                  <th>PSNR ↑</th>
+                  <th>SSIM ↑</th>
+                  <th>LPIPS ↓</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td style="text-align: left;">2D Anim→NVS*</td>
+                  <td>21.12</td>
+                  <td>0.63</td>
+                  <td>0.29</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;">NVS→2D Anim*</td>
+                  <td>21.97</td>
+                  <td>0.70</td>
+                  <td>0.28</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;">3D-Cinemagraphy</td>
+                  <td>22.46</td>
+                  <td>0.67</td>
+                  <td>0.24</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;">Make-it-4D</td>
+                  <td>21.40</td>
+                  <td>0.55</td>
+                  <td>0.31</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;" class="bold">Ours</td>
+                  <td class="bold">24.34</td>
+                  <td class="bold">0.76</td>
+                  <td class="bold">0.21</td>
+              </tr>
+          </tbody>
+        </table>
+        <p><strong>Table 2:</strong> Quantitative results of generating videos from novel views on Holynski validation set. The results in lines marked with '*' are retrieved from 3D-Cinemagraphy.</p>
+      </div>
+
+      <div style="align-items: center; justify-content: center; display: flex; flex-direction: column; margin-bottom: 20px;">
+        <table style="width: 80%; align-self: center; margin-bottom: 10px;">
+          <thead>
+              <tr style="border-bottom: none;">
+                  <th colspan="1" style="text-align: center; border-bottom: none;"></th>
+                  <th colspan="3" style="text-align: center;">Fluid Regions</th>
+                  <th colspan="3" style="text-align: center;">Other Regions</th>
+              </tr>
+              <tr>
+                  <th style="text-align: left; border-top: none;">Method</th>
+                  <th>PSNR ↑</th>
+                  <th>SSIM ↑</th>
+                  <th>LPIPS ↓</th>
+                  <th>PSNR ↑</th>
+                  <th>SSIM ↑</th>
+                  <th>LPIPS ↓</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td style="text-align: left;">Holynski et al.</td>
+                <td>26.10</td>
+                <td>0.82</td>
+                <td>0.18</td>
+                <td>24.50</td>
+                <td>0.72</td>
+                <td>0.32</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;">3D-Cinemagraphy</td>
+                  <td>26.30</td>
+                  <td>0.82</td>
+                  <td>0.15</td>
+                  <td>24.25</td>
+                  <td>0.75</td>
+                  <td>0.27</td>
+              </tr>
+              <tr>
+                  <td style="text-align: left;">Ours</td>
+                  <td class="bold">27.50</td>
+                  <td class="bold">0.86</td>
+                  <td class="bold">0.13</td>
+                  <td class="bold">25.92</td>
+                  <td class="bold">0.81</td>
+                  <td class="bold">0.12</td>
+              </tr>
+          </tbody>
+        </table>
+        <p><strong>Table 3:</strong> Quantitative results for fluid and non-fluid regions, respectively. </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Videos for Rebuttal</h2>
+      <h3 class="title" style="font-size: 1.5rem;"> Qualitative Ablation for N-S Simplification </h3>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div>
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/phy_ablation/gravity_00986_02124.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/phy_ablation/00986_02124.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+              <div style="width: 45%;"><strong>W/O gravity</strong></div>
+              <div style="width: 45%;"><strong>Ours</strong></div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/phy_ablation/pressure_00988_00696.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/phy_ablation/00988_00696.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+              <div style="width: 45%;"><strong>W pressure fields</strong></div>
+              <div style="width: 45%;"><strong>Ours</strong></div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/phy_ablation/vicosity_00984_01068.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/phy_ablation/00984_01068.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+              <div style="width: 45%;"><strong>W viscosity</strong></div>
+              <div style="width: 45%;"><strong>Ours</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--- Comparison with CogVideo-5B --->
+      <h3 class="title" style="font-size: 1.5rem;"> Comparison with CogVideo-5B </h3>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div>
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/cog_video/cog_video_00999_00696.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/cog_video/ours.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+              <div style="width: 45%;"><strong>CogVideo-5B</strong></div>
+              <div style="width: 45%;"><strong>Ours</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--- More view-varying results --->
+      <h3 class="title" style="font-size: 1.5rem;"> More view-varying results </h3>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div>
+          <div style="text-align: center;">
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/view_varying/3dc_circle-big_flow_scale=1.0.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/view_varying/our_circle-big_flow_scale=1.0.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around;">
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/view_varying/3dc_zoom-in-big_flow_scale=2.0.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_3dc_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+
+              <div style="width: 45%;" class="media-container" video-style="width: 100%; height: auto;" video-source="static/videos/iccv_rebuttal/view_varying/ours_zoom-in-big_flow_scale=2.0.mp4">
+                <!-- <video controls autoplay controls muted loop style="width: 100%; height: auto;">
+                  <source src="static/videos/cmp/edited_our_resize.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 20px; margin-bottom: 20px;">
+              <div style="width: 45%;"><strong>3D-Cinemagraphy</strong></div>
+              <div style="width: 45%;"><strong>Ours</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+<script>
+  // get all div with class media-container
+  const media_containers = document.querySelectorAll('.media-container');
+  console.log("Not Safari, displaying video.");
+  // Display video if the browser is not Safari
+  media_containers.forEach(container => {
+      const source = container.getAttribute('video-source');
+      const style = container.getAttribute('video-style');
+      const id = container.getAttribute('video-id');
+      container.innerHTML = `
+      <video poster="" id="${id}" autoplay controls muted loop style=${style}>
+        <!-- Your video file here -->
+        <source src="${source}"
+        type="video/mp4">
+      </video>`;
+  });
+</script>
+
+</body>
+</html>
